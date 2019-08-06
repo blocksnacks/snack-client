@@ -4,7 +4,7 @@ import { UserSession } from 'blockstack';
 import Login from '../Login';
 import UploadFile from '../UploadFile';
 
-const userSession = new UserSession
+const userSession = new UserSession();
 const App = () => {
   return (
     !userSession.isUserSignedIn()
