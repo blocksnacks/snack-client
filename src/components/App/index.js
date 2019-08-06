@@ -1,23 +1,14 @@
 import React from 'react';
-import './App.css';
 import { UserSession } from 'blockstack';
 
-const login = () => {
-  const userSession = new UserSession();
-  if (!userSession.isUserSignedIn() && userSession.isSignInPending()) {
-    userSession.handlePendingSignIn().then(console.log);
-  } else {
-    userSession.redirectToSignIn();
-  }
-}
+import Login from '../Login'
 
-function App() {
+const userSession = new UserSession
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <button onClick={login}>Log in!!!</button>
-      </header>
-    </div>
+    !userSession.isUserSignedIn()
+      ? <Login userSession={userSession}/>
+      : <div>File Page 🐈</div>
   );
 }
 
