@@ -1,0 +1,39 @@
+.no-margin {
+  margin: 0;
+}
+
+.share-file-container {
+  display:flex;
+  align-items: center;
+  margin: auto;
+  min-height: 36rem;
+  max-height: 42rem;
+  max-width: 45rem;
+}
+
+.share-file-main {
+  border: 1px solid black;
+  border-radius: 3%; 
+  
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.share-file-upload-file{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  width: 50%;
+  margin: 15px; 
+  padding: 30px 0px;
+  
+  border: dotted grey 1px;
+  border-radius: 2px;
+}
+
+.share-file-description {
+  width: 50%;
+  margin: 15px;
+  padding: 5px 0px 30px 0px;
+}
