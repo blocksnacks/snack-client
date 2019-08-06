@@ -1,5 +1,5 @@
 import React from 'react';
-import './ShareFile.css';
+import './UploadFile.css';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     },
   })
 )
-const ShareFile = () =>{
+const UploadFile = () =>{
   const classes = useStyles();
   return (
    <div className="share-file-container">
@@ -38,4 +38,4 @@ const ShareFile = () =>{
   );
 }
 
-export default ShareFile;
+export default UploadFile;
