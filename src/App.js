@@ -1,23 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { UserSession } from 'blockstack';
+
+const login = () => {
+  const userSession = new UserSession();
+  if (!userSession.isUserSignedIn() && userSession.isSignInPending()) {
+    userSession.handlePendingSignIn().then(console.log);
+  } else {
+    userSession.redirectToSignIn();
+  }
+}
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <button onClick={login}>Log in!!!</button>
       </header>
     </div>
   );
