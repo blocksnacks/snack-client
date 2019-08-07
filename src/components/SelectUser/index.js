@@ -40,7 +40,7 @@ export default () => {
       )) : null}
       {userList.length ? userList
         .filter(user => !selectedUsers.includes(user))
-        .map((user, index) =>
+        .map(user =>
           <MenuItem
             key={user}
             value={user}
