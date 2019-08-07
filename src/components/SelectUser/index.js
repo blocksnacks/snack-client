@@ -30,6 +30,7 @@ export default () => {
 
   return (
     <div>
+      <h3>Ugly a$$ autocomplete</h3>
       <Input value={search} onChange={evt => setSearch(evt.target.value)}/>
       {selectedUsers.length ? selectedUsers.map(selected => (
         <MenuItem
