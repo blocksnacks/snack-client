@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
+import { User, getConfig } from 'radiks';
 
 const useStyles = makeStyles(theme => ({
     fab: {
@@ -13,8 +14,18 @@ const useStyles = makeStyles(theme => ({
       margin: theme.spacing(1),
     },
   })
-)
-const UploadFile = () =>{
+);
+
+const handleSignIn = async () => {
+  const { userSession } = getConfig();
+  if (userSession.isSignInPending()) {
+    await userSession.handlePendingSignIn();
+    await User.createWithCurrentUser();
+  }  
+};
+
+const UploadFile = () => {
+  handleSignIn();
   const classes = useStyles();
   return (
    <div className="share-file-container">
