@@ -4,8 +4,9 @@ import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
-import { User, getConfig } from 'radiks';
 import SelectUser from '../SelectUser';
+import EmailDialog from '../EmailDialog';
+import { getConfig } from 'radiks';
 
 const useStyles = makeStyles(theme => ({
   fab: {
@@ -17,21 +18,11 @@ const useStyles = makeStyles(theme => ({
 })
 );
 
-const handleSignIn = async () => {
-  const { userSession } = getConfig();
-  if (userSession.isSignInPending()) {
-    await userSession.handlePendingSignIn();
-    await User.createWithCurrentUser();
-  }
-};
-
-const handleSignOut = () => {
-  const { userSession } = getConfig();
-  userSession.signUserOut('http://localhost:3000');
-}
-
-const UploadFile = () => {
-  handleSignIn();
+const UploadFile = ({ emailNotEntered, setEmailNotEntered }) => {
+  const handleSignOut = () => {
+    const { userSession } = getConfig();
+    userSession.signUserOut('http://localhost:3000');
+  };
   const classes = useStyles();
   return (
     <div>
@@ -53,6 +44,7 @@ const UploadFile = () => {
           </div>
         </section>
       </div>
+      {emailNotEntered ? <EmailDialog setEmailNotEntered={setEmailNotEntered} /> : null }
       <SelectUser />
       <Button
         variant="contained"
