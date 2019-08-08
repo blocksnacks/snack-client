@@ -15,15 +15,15 @@ configure({
   userSession
 });
 
-
 const App = () => {
+  const { userSession } = getConfig();
   const [loggedIn, setLoggedIn] = useState(false);
   const [emailNotEntered, setEmailNotEntered] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const handleSignIn = async () => {
-      const { userSession } = getConfig();
+      console.log({ userSession })
       if (!userSession.isUserSignedIn() && userSession.isSignInPending()) {
         await userSession.handlePendingSignIn();
         await User.createWithCurrentUser();
@@ -45,8 +45,12 @@ const App = () => {
     loading
       ? <LoadingScreen />
       : loggedIn
-        ? <UploadFile emailNotEntered={emailNotEntered} setEmailNotEntered={setEmailNotEntered}/>
-        : <Login userSession={userSession}/>
+        ? <UploadFile
+          emailNotEntered={emailNotEntered}
+          setEmailNotEntered={setEmailNotEntered}
+          userSession={userSession}
+        />
+        : <Login userSession={userSession} />
   );
 }
 
