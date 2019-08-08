@@ -48,11 +48,12 @@ const UploadFile = ({ emailNotEntered, setEmailNotEntered, userSession }) => {
   };
 
   const inviteUsers = async () => {
+    debugger;
     try {
       const group = await UserGroup.findById(groupId);
-      const newInvites = await Promise.all(selectedUsers.map(async (userId) => {
-        const { _id: id } = await group.makeGroupMembership(userId)
-        return { userId, id };
+      const newInvites = await Promise.all(selectedUsers.map(async (blockstackId) => {
+        const { _id: inviteId } = await group.makeGroupMembership(blockstackId)
+        return { blockstackId, inviteId };
       }));
       setInvites(invites => [...invites, newInvites]);
       sendEmails(newInvites, groupName, userSession);
