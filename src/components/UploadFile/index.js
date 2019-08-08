@@ -48,7 +48,6 @@ const UploadFile = ({ emailNotEntered, setEmailNotEntered, userSession }) => {
   };
 
   const inviteUsers = async () => {
-    debugger;
     try {
       const group = await UserGroup.findById(groupId);
       const newInvites = await Promise.all(selectedUsers.map(async (blockstackId) => {
