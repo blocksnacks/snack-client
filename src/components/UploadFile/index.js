@@ -5,6 +5,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
 import SelectUser from '../SelectUser';
+import EmailDialog from '../EmailDialog';
 
 const useStyles = makeStyles(theme => ({
     fab: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   })
 );
 
-const UploadFile = () => {
+const UploadFile = ({ emailNotEntered, setEmailNotEntered }) => {
   const classes = useStyles();
   return (
     <div>
@@ -38,6 +39,7 @@ const UploadFile = () => {
         </div>
       </section>
     </div>
+    {emailNotEntered ? <EmailDialog setEmailNotEntered={setEmailNotEntered} /> : null }
     <SelectUser />
   </div>
   );
