@@ -18,25 +18,33 @@ export default ({ selectUser, deselectUser, selectedUsers }) => {
   }, [search]);
 
   return (
-    <div>
-      <h3>Ugly a$$ autocomplete</h3>
-      <Input value={search} onChange={evt => setSearch(evt.target.value)} />
-      {selectedUsers.length ? selectedUsers.map(selected => (
-        <MenuItem
-          key={selected}
-          value={selected}
-          onClick={() => deselectUser(selected)}
-        >Selected: {selected}</MenuItem>
-      )) : null}
-      {userList.length ? userList
-        .filter(user => !selectedUsers.includes(user))
-        .map(user =>
+    <>
+      <Input
+        fullWidth
+        value={search}
+        onChange={evt => setSearch(evt.target.value)}
+      />
+      {selectedUsers.length
+        ? selectedUsers.map(selected => (
           <MenuItem
-            key={user}
-            value={user}
-            onClick={() => selectUser(user)}
-          >{user}</MenuItem>)
+            key={selected}
+            value={selected}
+            onClick={() => deselectUser(selected)}
+          >Selected: {selected}</MenuItem>
+        ))
         : null}
-    </div>
+      {userList.length
+        ? userList
+          .filter(user => !selectedUsers.includes(user))
+          .map(user =>
+            <MenuItem
+              key={user}
+              value={user}
+              onClick={() => selectUser(user)}
+            >
+              {user}
+            </MenuItem>)
+        : null}
+    </>
   );
 }

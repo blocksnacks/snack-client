@@ -5,7 +5,7 @@ import {
   Fab,
   makeStyles
 } from '@material-ui/core';
-import { Add } from '@material-ui/icons';
+import { Add, Label } from '@material-ui/icons';
 import { UserGroup } from 'radiks';
 
 import './UploadFile.css';
@@ -15,14 +15,9 @@ import SelectUser from '../SelectUser';
 import EmailDialog from '../EmailDialog';
 
 const useStyles = makeStyles(theme => ({
-  fab: {
-    margin: theme.spacing(1),
-  },
-  button: {
-    margin: theme.spacing(1),
-  },
-})
-);
+  fab: { margin: theme.spacing(1) },
+  button: { margin: theme.spacing(1) }
+}));
 
 const UploadFile = ({ emailNotEntered, setEmailNotEntered, userSession }) => {
   const [groupName, setGroupName] = useState('');
@@ -56,14 +51,24 @@ const UploadFile = ({ emailNotEntered, setEmailNotEntered, userSession }) => {
       }));
       setInvites(invites => [...invites, newInvites]);
       sendEmails(newInvites, groupName, userSession);
-    } catch (err){
+    } catch (err) {
       console.error('fail to send invites: %o', err);
     }
   };
 
   const classes = useStyles();
   return (
-    <div>
+    <div className="main-container">
+      <div className="logout-btn-container">
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={handleSignOut}
+        >
+          Logout
+      </Button>
+      </div>
       <div className="share-file-container">
         <section className="share-file-main">
           <div className="share-file-upload-file">
@@ -82,42 +87,50 @@ const UploadFile = ({ emailNotEntered, setEmailNotEntered, userSession }) => {
           </div>
         </section>
       </div>
-      {emailNotEntered ? <EmailDialog setEmailNotEntered={setEmailNotEntered} /> : null}
-      <Input
-        value={groupName}
-        onChange={({ target }) => setGroupName(target.value)}
-      />
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={createUserGroup}
-        disabled={!!groupId}
-      >
-        Create User Group
-      </Button>
-      <SelectUser
-        groupId={groupId}
-        selectUser={selectUser}
-        deselectUser={deselectUser}
-        selectedUsers={selectedUsers}
-      />
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={inviteUsers}
-        disabled={!selectedUsers.length && !groupId}
-      >
-        Invite Users
-      </Button>
-      <Button
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        onClick={handleSignOut}
-      >
-        Logout
-      </Button>
-    </div>
+      {emailNotEntered && <EmailDialog setEmailNotEntered={setEmailNotEntered} />}
+      <div className="form-container">
+        <div>
+          <h3>
+            Enter Usergroup Name
+          </h3>
+          <div className="input-container">
+            <Input
+              focus
+              fullWidth
+              value={groupName}
+              onChange={({ target }) => setGroupName(target.value)}
+            />
+          </div>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={createUserGroup}
+            disabled={(!groupId && !groupName.length) || !!groupId}
+          >
+            Create User Group
+          </Button>
+        </div>
+        <div>
+          <h3>Select Recipients</h3>
+          <div className="input-container">
+            <SelectUser
+              groupId={groupId}
+              selectUser={selectUser}
+              deselectUser={deselectUser}
+              selectedUsers={selectedUsers}
+            />
+          </div>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={inviteUsers}
+            disabled={!groupId || !selectedUsers.length}
+          >
+            Invite Users
+          </Button>
+        </div>
+      </div>
+    </div >
   );
 }
 
