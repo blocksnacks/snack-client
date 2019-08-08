@@ -2,9 +2,15 @@
   margin: 0;
 }
 
+.center {
+  text-align: center;
+}
+
 .share-file-container {
   display:flex;
+  justify-content: center;
   align-items: center;
+  padding: 0 30px;
   margin: auto;
   min-height: 36rem;
   max-height: 42rem;
@@ -12,19 +18,18 @@
 }
 
 .share-file-main {
-  border: 1px solid black;
-  border-radius: 3%; 
-  
-  display: flex;
+  border: none;
+  flex-direction:column;
+  align-items: center;
   justify-content: space-evenly;
-}
 
-.share-file-upload-file{
+}
+.share-file-upload-file {
   display: flex;
   align-items: center;
   flex-direction: column;
+  flex: 1 1 0;
 
-  width: 50%;
   margin: 15px; 
   padding: 30px 0px;
   
@@ -33,7 +38,18 @@
 }
 
 .share-file-description {
-  width: 50%;
   margin: 15px;
   padding: 5px 0px 30px 0px;
+  flex: 1 1 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .share-file-main {
+    border: 1px solid black;
+    border-radius: 5px; 
+            
+    display: flex;
+    justify-content: center;
+    flex-direction:row;
+  }
 }

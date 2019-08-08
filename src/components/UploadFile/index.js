@@ -33,7 +33,7 @@ const UploadFile = ({ emailNotEntered, setEmailNotEntered }) => {
               <AddIcon />
             </Fab>
             <p className="no-margin">Drag and drop files</p>
-            <p className="no-margin"> or click to send up to X FILE SIZE</p>
+            <p className="no-margin center"> or click to send up to X FILE SIZE</p>
             <Button variant="contained" color="primary" className={classes.button}>
               Upload Shiz
           </Button>
