@@ -23,7 +23,6 @@ const App = () => {
 
   useEffect(() => {
     const handleSignIn = async () => {
-      console.log({ userSession })
       if (!userSession.isUserSignedIn() && userSession.isSignInPending()) {
         await userSession.handlePendingSignIn();
         await User.createWithCurrentUser();
