@@ -10,7 +10,8 @@ export const sendEmails = async (recipients, groupName, userSession) => {
   try {
     return await (await fetch(RADIKS_URL + '/email/invite-users/', {
       method: 'POST',
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
+      headers: { 'Content-Type': 'application/json' }
     })).json();
   } catch (err) {
     console.error(err);
