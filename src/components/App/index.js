@@ -3,7 +3,7 @@ import { UserSession, AppConfig } from 'blockstack';
 import { configure, getConfig, User, Central } from 'radiks';
 import { USER_SETTINGS } from '../../constants';
 import Login from '../Login';
-import UploadFile from '../UploadFile';
+import LandingPage from '../LandingPage';
 import LoadingScreen from '../LoadingScreen';
 
 const userSession = new UserSession({
@@ -44,7 +44,7 @@ const App = () => {
     loading
       ? <LoadingScreen />
       : loggedIn
-        ? <UploadFile
+        ? <LandingPage
           emailNotEntered={emailNotEntered}
           setEmailNotEntered={setEmailNotEntered}
           userSession={userSession}
