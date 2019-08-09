@@ -1,6 +1,5 @@
 import { ERROR_POSTING_EMAILS, RADIKS_URL } from './constants';
 
-
 export const sendEmails = async (recipients, groupName, userSession) => {
   const body = {
     recipients,
