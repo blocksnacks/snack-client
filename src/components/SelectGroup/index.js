@@ -86,7 +86,6 @@ export default ({ userGroup, setUserGroup, userSession }) => {
           <h3>Select Recipients</h3>
           <div className="input-container">
             <SelectUser
-              groupId={groupId}
               selectUser={selectUser}
               deselectUser={deselectUser}
               selectedUsers={selectedUsers}
