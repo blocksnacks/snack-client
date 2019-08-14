@@ -1,74 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Button,
-  Input,
   Fab,
   makeStyles
 } from '@material-ui/core';
-import { Add, Label } from '@material-ui/icons';
-import { UserGroup } from 'radiks';
+import { Add } from '@material-ui/icons';
 
 import './UploadFile.css';
-import { sendEmails } from '../../api';
-
-import SelectUser from '../SelectUser';
-import EmailDialog from '../EmailDialog';
 
 const useStyles = makeStyles(theme => ({
   fab: { margin: theme.spacing(1) },
   button: { margin: theme.spacing(1) }
 }));
 
-const UploadFile = ({ emailNotEntered, setEmailNotEntered, userSession }) => {
-  const [groupName, setGroupName] = useState('');
-  const [groupId, setGroupId] = useState('');
-  const [selectedUsers, setSelectedUsers] = useState([]);
-  const [invites, setInvites] = useState([]);
-
-  const handleSignOut = () => {
-    userSession.signUserOut('http://localhost:3000');
-  };
-
-  const selectUser = (user) => setSelectedUsers(selectedUsers.concat(user));
-
-  const deselectUser = (user) => {
-    const userIndex = selectedUsers.indexOf(user);
-    setSelectedUsers(selectedUsers.slice(0, userIndex).concat(selectedUsers.slice(userIndex + 1)));
-  };
-
-  const createUserGroup = async () => {
-    if (!groupName) return;
-    const { _id } = await new UserGroup({ name: groupName }).create();
-    setGroupId(_id);
-  };
-
-  const inviteUsers = async () => {
-    try {
-      const group = await UserGroup.findById(groupId);
-      const newInvites = await Promise.all(selectedUsers.map(async (blockstackId) => {
-        const { _id: inviteId } = await group.makeGroupMembership(blockstackId)
-        return { blockstackId, inviteId };
-      }));
-      setInvites(invites => [...invites, newInvites]);
-      sendEmails(newInvites, groupName, userSession);
-    } catch (err) {
-      console.error('fail to send invites: %o', err);
-    }
-  };
-
+const UploadFile = ({ userGroup }) => {
   const classes = useStyles();
+
   return (
-    <div className="main-container">
-      <div className="logout-btn-container">
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          onClick={handleSignOut}
-        >
-          Logout
-      </Button>
-      </div>
+    <div className="share-wrapper">
+      <h2 className="share-header">Share with {userGroup.attrs.name}</h2>
       <div className="share-file-container">
         <section className="share-file-main">
           <div className="share-file-upload-file">
@@ -87,50 +37,7 @@ const UploadFile = ({ emailNotEntered, setEmailNotEntered, userSession }) => {
           </div>
         </section>
       </div>
-      {emailNotEntered && <EmailDialog setEmailNotEntered={setEmailNotEntered} />}
-      <div className="form-container">
-        <div>
-          <h3>
-            Enter Usergroup Name
-          </h3>
-          <div className="input-container">
-            <Input
-              focus
-              fullWidth
-              value={groupName}
-              onChange={({ target }) => setGroupName(target.value)}
-            />
-          </div>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={createUserGroup}
-            disabled={(!groupId && !groupName.length) || !!groupId}
-          >
-            Create User Group
-          </Button>
-        </div>
-        <div>
-          <h3>Select Recipients</h3>
-          <div className="input-container">
-            <SelectUser
-              groupId={groupId}
-              selectUser={selectUser}
-              deselectUser={deselectUser}
-              selectedUsers={selectedUsers}
-            />
-          </div>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={inviteUsers}
-            disabled={!groupId || !selectedUsers.length}
-          >
-            Invite Users
-          </Button>
-        </div>
-      </div>
-    </div >
+    </div>
   );
 }
 
