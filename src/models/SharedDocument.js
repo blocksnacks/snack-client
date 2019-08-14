@@ -1,6 +1,6 @@
-import { Model } from 'blockstack';
+import ModelValidator from './ModelValidator';
 
-export default class SharedDocument extends Model {
+export default class SharedDocument extends ModelValidator {
   static className = 'SharedDocument';
   static schema = {
     name: String,
@@ -10,6 +10,8 @@ export default class SharedDocument extends Model {
       type: String,
       decrypted: true
     },
-    uploadedBy: String
+    uploadedBy: String,
+    size: Number,
+    content: String
   }
 }
