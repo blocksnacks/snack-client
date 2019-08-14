@@ -13,11 +13,12 @@ const useStyles = makeStyles(theme => ({
   button: { margin: theme.spacing(1) }
 }));
 
-const UploadFile = ({ userSession }) => {
+const UploadFile = ({ userGroup }) => {
   const classes = useStyles();
 
   return (
-    <div>
+    <div className="share-wrapper">
+      <h2 className="share-header">Share with {userGroup.attrs.name}</h2>
       <div className="share-file-container">
         <section className="share-file-main">
           <div className="share-file-upload-file">
