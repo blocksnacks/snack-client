@@ -95,3 +95,7 @@
   flex-direction: column;
   justify-content: center;
 }
+
+#hidden-file-input {
+  display: none;
+}

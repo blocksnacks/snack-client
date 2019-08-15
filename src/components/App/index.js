@@ -20,6 +20,7 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [emailNotEntered, setEmailNotEntered] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [nullUsername, setNullUsername] = useState(false);
 
   useEffect(() => {
     const handleSignIn = async () => {
@@ -28,6 +29,12 @@ const App = () => {
         await User.createWithCurrentUser();
       }
       if (userSession.isUserSignedIn()) {
+        if (!userSession.loadUserData().username) {
+          setNullUsername(true);
+          setLoggedIn(false);
+          setLoading(false);
+          return;
+        }
         setLoggedIn(true);
         const userSettings = await Central.get(USER_SETTINGS);
         // check to see if user is missing email in central collection
@@ -38,7 +45,7 @@ const App = () => {
       setLoading(false);
     };
     handleSignIn();
-  }, []);
+  }, [userSession]);
 
   return (
     loading
@@ -49,7 +56,7 @@ const App = () => {
           setEmailNotEntered={setEmailNotEntered}
           userSession={userSession}
         />
-        : <Login userSession={userSession} />
+        : <Login userSession={userSession} nullUsername={nullUsername} />
   );
 }
 
