@@ -41,7 +41,7 @@ const UploadFile = ({ userGroup, userSession }) => {
             await sharedDoc.save();
             resolve();
           };
-          reader.readAsDataURL(fileObj);
+          reader.readAsText(fileObj);
         })));
         // Print some sort of success message here
         setFileList(null);
