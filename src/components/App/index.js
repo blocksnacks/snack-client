@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { UserSession, AppConfig } from 'blockstack';
 import { configure, getConfig, User, Central } from 'radiks';
+
 import { USER_SETTINGS } from '../../constants';
 import Login from '../Login';
+
 import LandingPage from '../LandingPage';
 import CircularProgress from '../CircularProgress';
 
@@ -20,7 +22,6 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [emailNotEntered, setEmailNotEntered] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [nullUsername, setNullUsername] = useState(false);
 
   useEffect(() => {
     const handleSignIn = async () => {
@@ -29,12 +30,6 @@ const App = () => {
         await User.createWithCurrentUser();
       }
       if (userSession.isUserSignedIn()) {
-        if (!userSession.loadUserData().username) {
-          setNullUsername(true);
-          setLoggedIn(false);
-          setLoading(false);
-          return;
-        }
         setLoggedIn(true);
         const userSettings = await Central.get(USER_SETTINGS);
         // check to see if user is missing email in central collection
@@ -45,9 +40,10 @@ const App = () => {
       setLoading(false);
     };
     handleSignIn();
-  }, [userSession]);
+  }, []);
 
   return (
+<<<<<<< HEAD
     loading
       ? <CircularProgress />
       : loggedIn
@@ -57,6 +53,25 @@ const App = () => {
           userSession={userSession}
         />
         : <Login userSession={userSession} nullUsername={nullUsername} />
+=======
+    <Switch>
+      <Route exact path="/" render={() => (
+        !loading
+          ? <LoadingScreen />
+          : loggedIn
+            ? (
+              <LandingPage
+                emailNotEntered={emailNotEntered}
+                setEmailNotEntered={setEmailNotEntered}
+                userSession={userSession}
+              />
+            )
+            : <Login userSession={userSession} />
+      )}
+      />
+      <Route path="/invitation/:invitation_id" component={InvitationPage}/>
+    </Switch>
+>>>>>>> cache
   );
 }
 
