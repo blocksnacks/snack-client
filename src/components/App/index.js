@@ -40,8 +40,8 @@ const App = () => {
       setLoading(false);
     };
     handleSignIn();
-  }, []);
-
+  }, [userSession]);
+  console.log({loading})
   return (
 <<<<<<< HEAD
     loading
@@ -56,7 +56,7 @@ const App = () => {
 =======
     <Switch>
       <Route exact path="/" render={() => (
-        !loading
+        loading
           ? <LoadingScreen />
           : loggedIn
             ? (
