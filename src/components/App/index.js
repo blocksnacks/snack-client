@@ -1,25 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { UserSession, AppConfig } from 'blockstack';
-import { configure, getConfig, User, Central } from 'radiks';
+import React, { useEffect, useState, useContext } from 'react';
+
+import { getConfig, User, Central } from 'radiks';
+import { Switch, Route } from 'react-router-dom';
 
 import { USER_SETTINGS } from '../../constants';
 import Login from '../Login';
+import { AppContext } from '../../contexts/AppContext';
 
 import LandingPage from '../LandingPage';
 import CircularProgress from '../CircularProgress';
 
 
-const userSession = new UserSession({
-  appConfig: new AppConfig(['store_write', 'publish_data'])
-});
-
-configure({
-  apiServer: process.env.RADIKS_SERVER || 'http://localhost:1260',
-  userSession
-});
 
 const App = () => {
-  const { userSession } = getConfig();
+  const { userSession } = useContext(AppContext);
+  // const { userSession } = getConfig();
   const [loggedIn, setLoggedIn] = useState(false);
   const [emailNotEntered, setEmailNotEntered] = useState(false);
   const [loading, setLoading] = useState(true);
