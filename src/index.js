@@ -6,9 +6,13 @@ import './index.css';
 
 import App from './components/App';
 
+import { AppContextProvider } from './contexts/AppContext'
+
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <AppContextProvider>
+    <Router>
+      <App />
+    </Router>
+  </AppContextProvider>,
   document.getElementById('root')
 );
