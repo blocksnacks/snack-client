@@ -8,6 +8,7 @@ import Login from '../Login';
 import LandingPage from '../LandingPage';
 import CircularProgress from '../CircularProgress';
 
+
 const userSession = new UserSession({
   appConfig: new AppConfig(['store_write', 'publish_data'])
 });
@@ -41,19 +42,8 @@ const App = () => {
     };
     handleSignIn();
   }, [userSession]);
-  console.log({loading})
+
   return (
-<<<<<<< HEAD
-    loading
-      ? <CircularProgress />
-      : loggedIn
-        ? <LandingPage
-          emailNotEntered={emailNotEntered}
-          setEmailNotEntered={setEmailNotEntered}
-          userSession={userSession}
-        />
-        : <Login userSession={userSession} nullUsername={nullUsername} />
-=======
     <Switch>
       <Route exact path="/" render={() => (
         loading
@@ -69,9 +59,9 @@ const App = () => {
             : <Login userSession={userSession} />
       )}
       />
-      <Route path="/invitation/:invitation_id" component={InvitationPage}/>
+      <Route exact path="/shared" component={Shared} />
+      <Route path="/invitation/:invitation_id" component={InvitationPage} />
     </Switch>
->>>>>>> cache
   );
 }
 

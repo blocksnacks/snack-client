@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
   button: { margin: theme.spacing(1) }
 }));
 
-export default ({ emailNotEntered, setEmailNotEntered, userSession }) => {
+const LandingPage = ({ emailNotEntered, setEmailNotEntered, userSession }) => {
   const [userGroup, setUserGroup] = useState('');
 
   const handleSignOut = () => {
@@ -31,8 +31,8 @@ export default ({ emailNotEntered, setEmailNotEntered, userSession }) => {
       </div>
       {emailNotEntered ? <EmailDialog setEmailNotEntered={setEmailNotEntered} /> : null}
       {userGroup
-      ? <UploadFile userSession={userSession} userGroup={userGroup} />
-      : <SelectGroup
+        ? <UploadFile userSession={userSession} userGroup={userGroup} />
+        : <SelectGroup
           userGroup={userGroup}
           setUserGroup={setUserGroup}
           userSession={userSession}
@@ -40,3 +40,5 @@ export default ({ emailNotEntered, setEmailNotEntered, userSession }) => {
     </div>
   );
 };
+
+export default LandingPage;
