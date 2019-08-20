@@ -1,0 +1,12 @@
+.invite-header {
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.content-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
