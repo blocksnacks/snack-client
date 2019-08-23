@@ -1,9 +1,11 @@
-import React from 'react'
-import {Button } from '@material-ui/core';
+import React, { useContext } from 'react';
 
-import './Login.css'
+import './Login.css';
 
-export default ({ userSession, nullUsername }) => {
+import { AppContext } from '../../contexts/AppContext';
+
+const Login = ({  nullUsername }) => {
+  const { userSession } = useContext(AppContext);
   return (
     <div className="App">
       <header className="App-header">
@@ -21,3 +23,5 @@ export default ({ userSession, nullUsername }) => {
     </div>
   );
 }
+
+export default Login;

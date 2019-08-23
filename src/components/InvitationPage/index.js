@@ -5,6 +5,7 @@ import { Container } from '@material-ui/core';
 import './InvitationPage.css';
 
 import LoadingScreen from '../LoadingScreen';
+import authNeeded from '../hocs/authNeeded';
 // import { GroupInvitation } from 'radiks';
 
 const noop = () => new Promise(_ => _()).then(() => ({ activate: noop }))
@@ -14,14 +15,13 @@ const InvitationPage = ({ match: { params } }) => {
   const [isAccepted, setIsAccepted] = useState(false);
 
   useEffect(() => {
-    (async function () {
+    (async () => {
       const invitation = await GroupInvitation.findById(params.invitation_id);
       await invitation.activate();
       await new Promise(_ => setTimeout(_, 3000));
       setIsAccepted(true);
-    })()
+    })();
   }, []);
-
 
   return (
     !isAccepted
@@ -37,4 +37,4 @@ const InvitationPage = ({ match: { params } }) => {
   );
 };
 
-export default InvitationPage;
+export default authNeeded(InvitationPage);
