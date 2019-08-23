@@ -12,6 +12,10 @@ import { AppContext } from '../../contexts/AppContext';
 import Login from '../Login';
 import LandingPage from '../LandingPage';
 import CircularProgress from '../CircularProgress';
+import LoadingScreen from '../LoadingScreen';
+import InvitationPage from '../InvitationPage';
+import Shared from '../Shared';
+import UploadFile from '../UploadFile';
 
 const App = () => {
   const { userSession } = useContext(AppContext);
@@ -30,7 +34,8 @@ const App = () => {
 
   return (
     <Switch>
-      <Route exact path="/" component={loading ? CircularProgress : LandingPage} />
+      <Route exact path="/" component={loading ? LoadingScreen : LandingPage} />
+      <Route exact path="/upload" component={UploadFile} />
       <Route exact path="/login" component={Login} />}
       <Route exact path="/shared" component={Shared} />
       <Route path="/invitation/:invitation_id" component={InvitationPage} />
