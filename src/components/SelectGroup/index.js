@@ -16,12 +16,11 @@ import authNeeded from '../hocs/authNeeded';
 
 const SelectGroup = ({ history }) => {
   const { userSession, setUserGroup } = useContext(AppContext);
-
   const [groupName, setGroupName] = useState('');
   const [group, setGroup] = useState(null);
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [tempUserGroup, setTempUserGroup] = useState('');
-  const [invites, setInvites] = useState([]);
+  const [, setInvites] = useState([]);
   const [possibleGroups, setPossibleGroups] = useState([]);
 
   useEffect(() => {

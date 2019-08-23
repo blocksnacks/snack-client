@@ -8,7 +8,7 @@ import {
   TableBody
 } from '@material-ui/core';
 
-import LoadingScreen from '../LoadingScreen';
+import CircularProgress from '../CircularProgress';
 
 import './Shared.css';
 import authNeeded from '../hocs/authNeeded';
@@ -37,7 +37,7 @@ const Shared = () => {
       {errorFetching
         ? <div>Error retrieving shared files</div>
         : !groups.length
-          ? <LoadingScreen />
+          ? <CircularProgress />
           : (
             <div className="table-container">
               <Table>

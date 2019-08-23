@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const LandingPage = ({ emailNotEntered, setEmailNotEntered }) => {
-  const { userSession, userGroup } = useContext(AppContext);
+  const { userSession } = useContext(AppContext);
   const classes = useStyles();
 
   const handleSignOut = () => {
