@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { User, UserGroup } from 'radiks';
+import { User } from 'radiks';
 import { Input, MenuItem } from '@material-ui/core';
+import authNeeded from '../hocs/authNeeded';
 
 const USER_FETCH_LIMIT = 15;
 const USER_FETCH_FIELDS = 'username';
 
-export default ({ selectUser, deselectUser, selectedUsers }) => {
+const SelectUser = ({ selectUser, deselectUser, selectedUsers }) => {
   const [search, setSearch] = useState('');
   const [userList, setUserList] = useState([]);
 
@@ -31,27 +32,30 @@ export default ({ selectUser, deselectUser, selectedUsers }) => {
         value={search}
         onChange={evt => setSearch(evt.target.value)}
       />
-      {selectedUsers.length
-        ? selectedUsers.map(selected => (
+      {selectedUsers.length && (
+        selectedUsers.map(selected => (
           <MenuItem
             key={selected}
             value={selected}
             onClick={() => deselectUser(selected)}
           >Selected: {selected}</MenuItem>
         ))
-        : null}
-      {userList.length
-        ? userList
+      )}
+      {userList.length && (
+        userList
           .filter(user => !selectedUsers.includes(user))
-          .map(user =>
+          .map(user => (
             <MenuItem
               key={user}
               value={user}
               onClick={() => selectUser(user)}
             >
               {user}
-            </MenuItem>)
-        : null}
+            </MenuItem>
+          ))
+      )}
     </>
   );
 }
+
+export default authNeeded(SelectUser);

@@ -1,20 +1,29 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { 
+  useRef, 
+  useEffect, 
+  useState,
+  useContext
+} from 'react';
 import {
   Button,
   Fab,
   makeStyles
 } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
-import SharedDocument from '../../models/SharedDocument';
 
 import './UploadFile.css';
+
+import SharedDocument from '../../models/SharedDocument';
+import { AppContext } from '../../contexts/AppContext';
+import authNeeded from '../hocs/authNeeded';
 
 const useStyles = makeStyles(theme => ({
   fab: { margin: theme.spacing(1) },
   button: { margin: theme.spacing(1) }
 }));
 
-const UploadFile = ({ userGroup, userSession }) => {
+const UploadFile = () => {
+  const { userGroup, userSession} = useContext(AppContext);
   const classes = useStyles();
   const fileInput = useRef(null);
   const [fileList, setFileList] = useState(null);
@@ -98,4 +107,4 @@ const UploadFile = ({ userGroup, userSession }) => {
   );
 }
 
-export default UploadFile;
+export default authNeeded(UploadFile);

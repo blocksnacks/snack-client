@@ -1,4 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { 
+  useState, 
+  useEffect, 
+  useContext 
+} from 'react';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
@@ -6,8 +10,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { UserGroup } from 'radiks';
 import SelectUser from '../SelectUser';
 import { sendEmails } from '../../api';
+import { AppContext } from '../../contexts/AppContext';
+import authNeeded from '../hocs/authNeeded';
 
-export default ({ userGroup, setUserGroup, userSession }) => {
+const SelectGroup = () => {
+  const { userSession, userGroup, setUserGroup } = useContext(AppContext);
+
   const [groupName, setGroupName] = useState('');
   const [group, setGroup] = useState(null);
   const [selectedUsers, setSelectedUsers] = useState([]);
@@ -111,3 +119,5 @@ export default ({ userGroup, setUserGroup, userSession }) => {
     </div>
   );
 };
+
+export default authNeeded(SelectGroup);

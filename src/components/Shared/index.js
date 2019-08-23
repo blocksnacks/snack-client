@@ -11,8 +11,9 @@ import {
 import LoadingScreen from '../LoadingScreen';
 
 import './Shared.css';
+import authNeeded from '../hocs/authNeeded';
 
-const Shared = (props) => {
+const Shared = () => {
   const [groups, setGroups] = useState([]);
   const [errorFetching, setErrorFetching] = useState(false);
 
@@ -59,4 +60,4 @@ const Shared = (props) => {
   )
 }
 
-export default Shared;
+export default authNeeded(Shared);

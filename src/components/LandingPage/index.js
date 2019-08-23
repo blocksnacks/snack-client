@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
-import EmailDialog from '../EmailDialog';
+import React, { useContext } from 'react';
 import { makeStyles, Button } from '@material-ui/core';
+
+import EmailDialog from '../EmailDialog';
 import UploadFile from '../UploadFile';
 import SelectGroup from '../SelectGroup';
+import { AppContext } from '../../contexts/AppContext';
+import authNeeded from '../hocs/authNeeded';
 
 const useStyles = makeStyles(theme => ({
   button: { margin: theme.spacing(1) }
 }));
 
-const LandingPage = ({ emailNotEntered, setEmailNotEntered, userSession }) => {
-  const [userGroup, setUserGroup] = useState('');
+const LandingPage = ({ emailNotEntered, setEmailNotEntered }) => {
+  const { userSession, userGroup } = useContext(AppContext);
+  const classes = useStyles();
 
   const handleSignOut = () => {
     userSession.signUserOut('http://localhost:3000');
   };
-
-  const classes = useStyles();
 
   return (
     <div className="main-container">
@@ -29,16 +31,10 @@ const LandingPage = ({ emailNotEntered, setEmailNotEntered, userSession }) => {
           Logout
       </Button>
       </div>
-      {emailNotEntered ? <EmailDialog setEmailNotEntered={setEmailNotEntered} /> : null}
-      {userGroup
-        ? <UploadFile userSession={userSession} userGroup={userGroup} />
-        : <SelectGroup
-          userGroup={userGroup}
-          setUserGroup={setUserGroup}
-          userSession={userSession}
-        />}
+      {emailNotEntered && <EmailDialog setEmailNotEntered={setEmailNotEntered} />}
+      {userGroup ? <UploadFile /> : <SelectGroup />}
     </div>
   );
 };
 
-export default LandingPage;
+export default authNeeded(LandingPage);
