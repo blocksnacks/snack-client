@@ -4,7 +4,7 @@ import { configure, getConfig, User, Central } from 'radiks';
 import { USER_SETTINGS } from '../../constants';
 import Login from '../Login';
 import LandingPage from '../LandingPage';
-import LoadingScreen from '../LoadingScreen';
+import CircularProgress from '../CircularProgress';
 
 const userSession = new UserSession({
   appConfig: new AppConfig(['store_write', 'publish_data'])
@@ -49,7 +49,7 @@ const App = () => {
 
   return (
     loading
-      ? <LoadingScreen />
+      ? <CircularProgress />
       : loggedIn
         ? <LandingPage
           emailNotEntered={emailNotEntered}
