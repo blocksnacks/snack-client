@@ -85,17 +85,27 @@ const UploadFile = () => {
                 <Add />
               </Fab>
             </label>
-            <p className="no-margin">Drag and drop files</p>
-            <p className="no-margin center"> or click to send up to X FILE SIZE</p>
-            <Button
+            <p className="no-margin">Click to add</p>
+            <p className="no-margin center">files to share</p>
+            { fileList && fileList.length && (
+              <>
+              <div className="file-list">
+              <h4>Files to share:</h4>
+              <ul>
+              {fileList.map(file => <li className="no-margin" key={file.name}>{file.name}</li>)}
+              </ul>
+              </div>
+              <Button
               variant="contained"
               color="primary"
               className={classes.button}
               onClick={handleFileSubmit}
-            >
-              Upload Shiz
-            </Button>
-            {fileList && fileList.length ? fileList.map(file => <p key={file.name}>{file.name}</p>) : null}
+              fullWidth
+              >
+              Send Files
+              </Button>
+              </>
+                )}
           </div>
           <div className="share-file-description">
             <h1 className="no-margin"> Simple Private BlockSnack File Sharing</h1>
