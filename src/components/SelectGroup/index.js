@@ -9,7 +9,7 @@ import { sendEmails } from '../../api';
 
 export default ({ userGroup, setUserGroup, userSession }) => {
   const [groupName, setGroupName] = useState('');
-  const [groupId, setGroupId] = useState('');
+  const [group, setGroup] = useState(null);
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [tempUserGroup, setTempUserGroup] = useState('');
   const [invites, setInvites] = useState([]);
@@ -29,14 +29,13 @@ export default ({ userGroup, setUserGroup, userSession }) => {
   const createUserGroup = async () => {
     if (!groupName) return;
     const newGroup = await new UserGroup({ name: groupName }).create();
-    setGroupId(newGroup._id);
+    setGroup(newGroup);
     setTempUserGroup(newGroup);
     setPossibleGroups(prevGroups => prevGroups.concat(newGroup));
   };
 
   const inviteUsers = async () => {
     try {
-      const group = await UserGroup.findById(groupId);
       const newInvites = await Promise.all(selectedUsers.map(async (blockstackId) => {
         const { _id: inviteId } = await group.makeGroupMembership(blockstackId)
         return { blockstackId, inviteId };
@@ -77,7 +76,7 @@ export default ({ userGroup, setUserGroup, userSession }) => {
             variant="contained"
             color="primary"
             onClick={createUserGroup}
-            disabled={(!groupId && !groupName.length) || !!groupId}
+            disabled={(!group && !groupName.length) || !!group}
           >
             Create User Group
           </Button>
@@ -95,7 +94,7 @@ export default ({ userGroup, setUserGroup, userSession }) => {
             variant="contained"
             color="primary"
             onClick={inviteUsers}
-            disabled={!groupId || !selectedUsers.length}
+            disabled={!group || !selectedUsers.length}
           >
             Invite Users
           </Button>
