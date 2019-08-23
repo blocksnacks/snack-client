@@ -7,11 +7,13 @@ export default ({ userSession, nullUsername }) => {
   return (
     <div className="App">
       <header className="App-header">
-        <div>
+        <div className="sign-in">
+          <h5>{`Elegant, secure file sharing \n on the blockchain`}</h5>
           <Button 
-          onClick={() => userSession.redirectToSignIn()}
-          variant="contained"
-          color="primary"
+            fullWidth
+            onClick={() => userSession.redirectToSignIn()}
+            variant="contained"
+            color="primary"
           >
             Log in
           </Button>
