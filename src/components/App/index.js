@@ -12,7 +12,6 @@ import { AppContext } from '../../contexts/AppContext';
 import Login from '../Login';
 import LandingPage from '../LandingPage';
 import CircularProgress from '../CircularProgress';
-import LoadingScreen from '../LoadingScreen';
 import InvitationPage from '../InvitationPage';
 import Shared from '../Shared';
 import UploadFile from '../UploadFile';

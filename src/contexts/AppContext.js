@@ -1,4 +1,8 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { 
+  createContext, 
+  useState, 
+  useEffect 
+} from 'react';
 import { UserSession, AppConfig } from 'blockstack';
 import { configure, Central } from 'radiks';
 import { USER_SETTINGS } from '../constants';
@@ -27,7 +31,7 @@ export const AppContextProvider = ({ children }) => {
         setEmailNotEntered(!userSettings || !userSettings.email);
       } else setLoggedIn(false);
     })();
-  }, []);
+  }, [loggedIn]);
 
   return (
     <AppContext.Provider
