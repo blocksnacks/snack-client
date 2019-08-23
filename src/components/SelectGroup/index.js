@@ -3,6 +3,7 @@ import React, {
   useEffect, 
   useContext 
 } from 'react';
+import { withRouter } from 'react-router-dom';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
@@ -13,8 +14,8 @@ import { sendEmails } from '../../api';
 import { AppContext } from '../../contexts/AppContext';
 import authNeeded from '../hocs/authNeeded';
 
-const SelectGroup = () => {
-  const { userSession, userGroup, setUserGroup } = useContext(AppContext);
+const SelectGroup = ({ history }) => {
+  const { userSession, setUserGroup } = useContext(AppContext);
 
   const [groupName, setGroupName] = useState('');
   const [group, setGroup] = useState(null);
@@ -110,7 +111,10 @@ const SelectGroup = () => {
         <Button
           variant="contained"
           color="secondary"
-          onClick={() => setUserGroup(tempUserGroup)}
+          onClick={() => {
+            setUserGroup(tempUserGroup)
+            history.push('/upload')
+          }}
           disabled={!tempUserGroup}
         >
           Share With This Group
@@ -120,4 +124,4 @@ const SelectGroup = () => {
   );
 };
 
-export default authNeeded(SelectGroup);
+export default authNeeded(withRouter(SelectGroup));

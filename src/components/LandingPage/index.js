@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { makeStyles, Button } from '@material-ui/core';
 
 import EmailDialog from '../EmailDialog';
-import UploadFile from '../UploadFile';
 import SelectGroup from '../SelectGroup';
 import { AppContext } from '../../contexts/AppContext';
 import authNeeded from '../hocs/authNeeded';
@@ -32,7 +31,7 @@ const LandingPage = ({ emailNotEntered, setEmailNotEntered }) => {
       </Button>
       </div>
       {emailNotEntered && <EmailDialog setEmailNotEntered={setEmailNotEntered} />}
-      {userGroup ? <UploadFile /> : <SelectGroup />}
+      <SelectGroup />
     </div>
   );
 };

@@ -16,14 +16,12 @@ export const AppContext = createContext()
 
 export const AppContextProvider = ({ children }) => {
   const [userGroup, setUserGroup] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(userSession.isUserSignedIn());
   const [emailNotEntered, setEmailNotEntered] = useState(false);
 
-  console.log('userSession.isUserSignedIn()', userSession.isUserSignedIn())
   useEffect(() => {
     (async () => {
-      if (userSession.isUserSignedIn()) {
-        setLoggedIn(true);
+      if (loggedIn) {
         const userSettings = await Central.get(USER_SETTINGS);
         // check to see if user is missing email in central collection
         setEmailNotEntered(!userSettings || !userSettings.email);
