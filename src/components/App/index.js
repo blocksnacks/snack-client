@@ -34,7 +34,7 @@ const App = () => {
 
   return (
     <Switch>
-      <Route exact path="/" component={loading ? LoadingScreen : LandingPage} />
+      <Route exact path="/" component={loading ? CircularProgress : LandingPage} />
       <Route exact path="/upload" component={UploadFile} />
       <Route exact path="/login" component={Login} />}
       <Route exact path="/shared" component={Shared} />
