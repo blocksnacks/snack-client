@@ -33,7 +33,7 @@ const InvitationPage = ({ match: { params } }) => {
           </div>
         </Container>
       )
-      : <Redirect to="/" />
+      : <Redirect to="/shared" />
   );
 };
 

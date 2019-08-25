@@ -1,3 +1,14 @@
 .table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table-container > table {
   width: 90%;
+}
+
+.table-title {
+  text-align: center;
+  margin: 30px 0;
 }
