@@ -15,7 +15,7 @@ import './UploadFile.css';
 
 import SharedDocument from '../../models/SharedDocument';
 import { AppContext } from '../../contexts/AppContext';
-import authNeeded from '../hocs/authNeeded';
+import { authNeeded, addNavbar } from '../hocs';
 
 const useStyles = makeStyles(theme => ({
   fab: { margin: theme.spacing(1) },
@@ -117,4 +117,4 @@ const UploadFile = () => {
   );
 }
 
-export default authNeeded(UploadFile);
+export default authNeeded(addNavbar(UploadFile));

@@ -11,7 +11,7 @@ import {
 import CircularProgress from '../CircularProgress';
 
 import './Shared.css';
-import authNeeded from '../hocs/authNeeded';
+import { authNeeded, addNavbar } from '../hocs';
 
 const Shared = () => {
   const [groups, setGroups] = useState([]);
@@ -60,4 +60,4 @@ const Shared = () => {
   )
 }
 
-export default authNeeded(Shared);
+export default authNeeded(addNavbar(Shared));

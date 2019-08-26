@@ -9,10 +9,10 @@ import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { UserGroup } from 'radiks';
+
 import SelectUser from '../SelectUser';
 import { sendEmails } from '../../api';
 import { AppContext } from '../../contexts/AppContext';
-import authNeeded from '../hocs/authNeeded';
 
 const SelectGroup = ({ history }) => {
   const { userSession, setUserGroup } = useContext(AppContext);
@@ -123,4 +123,4 @@ const SelectGroup = ({ history }) => {
   );
 };
 
-export default authNeeded(withRouter(SelectGroup));
+export default withRouter(SelectGroup);

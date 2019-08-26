@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { User } from 'radiks';
 import { Input, MenuItem } from '@material-ui/core';
-import authNeeded from '../hocs/authNeeded';
 
 const USER_FETCH_LIMIT = 15;
 const USER_FETCH_FIELDS = 'username';
@@ -58,4 +57,4 @@ const SelectUser = ({ selectUser, deselectUser, selectedUsers }) => {
   );
 }
 
-export default authNeeded(SelectUser);
+export default SelectUser;
