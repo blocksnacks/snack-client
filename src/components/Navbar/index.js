@@ -33,13 +33,12 @@ const NavBar = ({ location: { pathname } }) => {
           value="/shared"
           component={Link}
         />
-        <Button
+        <Tab
+          label="Logout"
           variant="contained"
           color="primary"
           onClick={() => userSession.signUserOut('http://localhost:3000')}
-        >
-          Logout
-      </Button>
+        />
       </Tabs>
     </Paper>
   )
