@@ -22,7 +22,7 @@ const Login = ({ nullUsername }) => {
                 color="primary"
               >
                 Log in
-          </Button>
+              </Button>
               {nullUsername && <p>Your username is not yet registered. Please come back again once your registration process is complete.</p>}
             </div>
           </header>
