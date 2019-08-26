@@ -1,39 +1,16 @@
-import React, { useContext } from 'react';
-import { makeStyles, Button } from '@material-ui/core';
+import React from 'react';
 
 import EmailDialog from '../EmailDialog';
 import SelectGroup from '../SelectGroup';
-import { AppContext } from '../../contexts/AppContext';
-import authNeeded from '../hocs/authNeeded';
-
-const useStyles = makeStyles(theme => ({
-  button: { margin: theme.spacing(1) }
-}));
+import { authNeeded, addNavbar } from '../hocs';
 
 const LandingPage = ({ emailNotEntered, setEmailNotEntered }) => {
-  const { userSession } = useContext(AppContext);
-  const classes = useStyles();
-
-  const handleSignOut = () => {
-    userSession.signUserOut('http://localhost:3000');
-  };
-
   return (
     <div className="main-container">
-      <div className="logout-btn-container">
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          onClick={handleSignOut}
-        >
-          Logout
-      </Button>
-      </div>
       {emailNotEntered && <EmailDialog setEmailNotEntered={setEmailNotEntered} />}
       <SelectGroup />
     </div>
   );
 };
 
-export default authNeeded(LandingPage);
+export default authNeeded(addNavbar(LandingPage));

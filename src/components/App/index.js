@@ -32,13 +32,15 @@ const App = () => {
   }, [userSession]);
 
   return (
-    <Switch>
-      <Route exact path="/" component={loading ? CircularProgress : LandingPage} />
-      <Route exact path="/upload" component={UploadFile} />
-      <Route exact path="/login" component={Login} />}
-      <Route exact path="/shared" component={Shared} />
-      <Route path="/invitation/:invitation_id" component={InvitationPage} />
-    </Switch>
+    <>
+      <Switch>
+        <Route exact path="/login" component={Login} />}
+        <Route exact path="/" component={loading ? CircularProgress : LandingPage} />
+        <Route exact path="/upload" component={UploadFile} />
+        <Route exact path="/shared" component={Shared} />
+        <Route path="/invitation/:invitation_id" component={InvitationPage} />
+      </Switch>
+    </>
   );
 }
 
