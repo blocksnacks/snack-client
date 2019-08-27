@@ -4,7 +4,8 @@ import {
   TableHead,
   TableRow,
   TableCell,
-  TableBody
+  TableBody,
+  Button
 } from '@material-ui/core';
 import bytes from 'bytes';
 import './Shared.css';
@@ -20,11 +21,14 @@ const Shared = () => {
   const [docs, setDocs] = useState([]);
   const [errorFetching, setErrorFetching] = useState(false);
   const [fetching, setFetching] = useState(false);
+  const [downloadInProgress, setDownloadInProgress] = useState(false);
+  const [activeDoc, setActiveDoc] = useState(null);
 
   useEffect(() => {
     (async function () {
       try {
         setFetching(true);
+        console.log((await SharedDocument.fetchList()))
         const docs = (await SharedDocument.fetchList())
           .filter(({ attrs }) => typeof attrs.name === 'string')
           .map(({ attrs}) => ({
@@ -34,6 +38,7 @@ const Shared = () => {
             size: attrs.size,
             uploadedBy: attrs.uploadedBy,
             content: attrs.content,
+            mimeType: attrs.mimeType,
           }));
         setFetching(false);
         setDocs(docs);
@@ -43,6 +48,23 @@ const Shared = () => {
       }
     })();
   }, [])
+
+  useEffect(() => {
+    (async function() {
+      if (downloadInProgress && activeDoc) {
+        const dataUrl = URL.createObjectURL(
+          new Blob([activeDoc.content, { type: activeDoc.mimeType }])
+        );
+        const aTag = document.createElement('a');
+        aTag.href = dataUrl;
+        aTag.download = activeDoc.name;
+        aTag.click();
+        URL.revokeObjectURL(dataUrl);
+        setActiveDoc(null);
+        setDownloadInProgress(false);
+      }
+    })();
+  }, [downloadInProgress, activeDoc]);
 
   return (
     <div>
@@ -73,7 +95,15 @@ const Shared = () => {
                       <TableCell>{doc.createdDate}</TableCell>
                       <TableCell>{bytes(doc.size)}</TableCell>
                       <TableCell>{doc.uploadedBy}</TableCell>
-                      <TableCell>DL</TableCell>
+                      <TableCell>
+                        <Button
+                          disabled={downloadInProgress}
+                          onClick={() => {
+                            setActiveDoc(doc);
+                            setDownloadInProgress(true);
+                          }}
+                        >DL</Button>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
