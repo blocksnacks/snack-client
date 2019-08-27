@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { UserGroup } from 'radiks';
 import {
   Table,
   TableHead,
@@ -20,12 +19,13 @@ import SharedDocument from '../../models/SharedDocument';
 const Shared = () => {
   const [docs, setDocs] = useState([]);
   const [errorFetching, setErrorFetching] = useState(false);
+  const [fetching, setFetching] = useState(false);
 
   useEffect(() => {
     (async function () {
       try {
-        const groups = await UserGroup.myGroups();
-        const docs = (await SharedDocument.fetchList({ userGroupId: groups[0].id }))
+        setFetching(true);
+        const docs = (await SharedDocument.fetchList())
           .filter(({ attrs }) => typeof attrs.name === 'string')
           .map(({ attrs}) => ({
             id: attrs._id,
@@ -34,7 +34,8 @@ const Shared = () => {
             size: attrs.size,
             uploadedBy: attrs.uploadedBy,
             content: attrs.content,
-          }))
+          }));
+        setFetching(false);
         setDocs(docs);
       } catch (err) {
         console.error(err);
@@ -50,22 +51,23 @@ const Shared = () => {
       </h2>
       {errorFetching
         ? <div>Error retrieving shared files</div>
-        : !docs.length
-          ? <CircularProgress />
-          : (
+        : docs.length
+          ? (
             <div className="table-container">
               <Table>
                 <TableHead>
-                  <TableCell>File ID</TableCell>
-                  <TableCell>File Name</TableCell>
-                  <TableCell>Created At</TableCell>
-                  <TableCell>Size</TableCell>
-                  <TableCell>Uploaded By</TableCell>
-                  <TableCell>Download</TableCell>
+                  <TableRow>
+                    <TableCell>File ID</TableCell>
+                    <TableCell>File Name</TableCell>
+                    <TableCell>Created At</TableCell>
+                    <TableCell>Size</TableCell>
+                    <TableCell>Uploaded By</TableCell>
+                    <TableCell>Download</TableCell>
+                  </TableRow>
                 </TableHead>
                 <TableBody>
                   {docs.map((doc) => (
-                    <TableRow>
+                    <TableRow key={doc.id}>
                       <TableCell>{doc.id}</TableCell>
                       <TableCell>{doc.name}</TableCell>
                       <TableCell>{doc.createdDate}</TableCell>
@@ -77,7 +79,11 @@ const Shared = () => {
                 </TableBody>
               </Table>
             </div>
-          )}
+          )
+          : fetching
+            ? <CircularProgress />
+            : <div>You don't have any documents</div>
+          }
     </div>
   )
 }
