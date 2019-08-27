@@ -4,7 +4,7 @@ import React, {
   useState,
   useContext
 } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import {
   Button,
   Fab,
@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   button: { margin: theme.spacing(1) }
 }));
 
-const UploadFile = () => {
+const UploadFile = ({ history }) => {
   const { userGroup, userSession } = useContext(AppContext);
   const classes = useStyles();
   const fileInput = useRef(null);
@@ -49,6 +49,7 @@ const UploadFile = () => {
               content: fileStr,
             });
             await sharedDoc.save();
+            history.push('/shared');
             resolve();
           };
           reader.readAsText(fileObj);
@@ -106,7 +107,7 @@ const UploadFile = () => {
                       fullWidth
                     >
                       Send Files
-              </Button>
+                    </Button>
                   </>
                 )}
               </div>
@@ -121,4 +122,4 @@ const UploadFile = () => {
   );
 }
 
-export default authNeeded(addNavbar(UploadFile));
+export default authNeeded(addNavbar(withRouter(UploadFile)));
