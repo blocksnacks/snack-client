@@ -51,7 +51,7 @@ const UploadFile = () => {
             await sharedDoc.save();
             resolve();
           };
-          reader.readAsText(fileObj);
+          reader.readAsDataURL(fileObj);
         })));
         // Print some sort of success message here
         setFileList(null);
