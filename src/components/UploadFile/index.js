@@ -1,9 +1,10 @@
-import React, { 
-  useRef, 
-  useEffect, 
+import React, {
+  useRef,
+  useEffect,
   useState,
   useContext
 } from 'react';
+import { Redirect } from 'react-router-dom';
 import {
   Button,
   Fab,
@@ -23,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const UploadFile = () => {
-  const { userGroup, userSession} = useContext(AppContext);
+  const { userGroup, userSession } = useContext(AppContext);
   const classes = useStyles();
   const fileInput = useRef(null);
   const [fileList, setFileList] = useState(null);
@@ -57,7 +58,7 @@ const UploadFile = () => {
       }
     };
     submitDocuments();
-  }, [fileList, userGroup._id, userSession, submitted]);
+  }, [fileList, userGroup, userSession, submitted]);
 
   const handleFileSubmit = () => {
     setFileList(Array.from(fileInput.current.files));
@@ -68,52 +69,55 @@ const UploadFile = () => {
   };
 
   return (
-    <div className="share-wrapper">
-      <h2 className="share-header">Share with {userGroup.attrs.name}</h2>
-      <div className="share-file-container">
-        <section className="share-file-main">
-          <div className="share-file-upload-file">
-            <input
-              id="hidden-file-input"
-              multiple
-              type="file"
-              ref={fileInput}
-              onChange={() => setFileList(Array.from(fileInput.current.files))}
-            />
-            <label htmlFor="hidden-file-input">
-              <Fab aria-label="add" component="span" color="primary" className={classes.fab}>
-                <Add />
-              </Fab>
-            </label>
-            <p className="no-margin">Click to add</p>
-            <p className="no-margin center">files to share</p>
-            { fileList && fileList.length && (
-              <>
-              <div className="file-list">
-              <h4>Files to share:</h4>
-              <ul>
-              {fileList.map(file => <li className="no-margin" key={file.name}>{file.name}</li>)}
-              </ul>
-              </div>
-              <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              onClick={handleFileSubmit}
-              fullWidth
-              >
-              Send Files
+    userGroup
+      ? (
+        <div className="share-wrapper">
+          <h2 className="share-header">Share with {userGroup.attrs.name}</h2>
+          <div className="share-file-container">
+            <section className="share-file-main">
+              <div className="share-file-upload-file">
+                <input
+                  id="hidden-file-input"
+                  multiple
+                  type="file"
+                  ref={fileInput}
+                  onChange={() => setFileList(Array.from(fileInput.current.files))}
+                />
+                <label htmlFor="hidden-file-input">
+                  <Fab aria-label="add" component="span" color="primary" className={classes.fab}>
+                    <Add />
+                  </Fab>
+                </label>
+                <p className="no-margin">Click to add</p>
+                <p className="no-margin center">files to share</p>
+                {fileList && fileList.length && (
+                  <>
+                    <div className="file-list">
+                      <h4>Files to share:</h4>
+                      <ul>
+                        {fileList.map(file => <li className="no-margin" key={file.name}>{file.name}</li>)}
+                      </ul>
+                    </div>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      className={classes.button}
+                      onClick={handleFileSubmit}
+                      fullWidth
+                    >
+                      Send Files
               </Button>
-              </>
+                  </>
                 )}
+              </div>
+              <div className="share-file-description">
+                <h1 className="no-margin"> Simple Private BlockSnack File Sharing</h1>
+                <p>Add the files you'd like to share with your group</p>
+              </div>
+            </section>
           </div>
-          <div className="share-file-description">
-            <h1 className="no-margin"> Simple Private BlockSnack File Sharing</h1>
-            <p>Add the files you'd like to share with your group</p>
-          </div>
-        </section>
-      </div>
-    </div>
+        </div>)
+      : <Redirect to="/" />
   );
 }
 

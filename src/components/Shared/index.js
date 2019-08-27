@@ -30,7 +30,7 @@ const Shared = () => {
   }, [])
 
   return (
-    <div className="content-container">
+    <div className="shared-container">
       <h2>
         Files Shared with me
       </h2>
