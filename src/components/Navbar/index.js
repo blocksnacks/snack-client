@@ -11,7 +11,7 @@ import { AppContext } from '../../contexts/AppContext';
 
 const NavBar = ({ location: { pathname } }) => {
   const { userSession } = useContext(AppContext)
-  const [value, setValue] = useState(pathname);
+  const [value, setValue] = useState(pathname === '/upload' ? '/' : pathname);
   return (
     <Paper>
       <Tabs
