@@ -59,7 +59,7 @@ const UploadFile = ({ history }) => {
       }
     };
     submitDocuments();
-  }, [fileList, userGroup, userSession, submitted]);
+  }, [fileList, userGroup, userSession, submitted, history]);
 
   const handleFileSubmit = () => {
     setFileList(Array.from(fileInput.current.files));
