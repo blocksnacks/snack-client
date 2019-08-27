@@ -31,28 +31,32 @@ const SelectUser = ({ selectUser, deselectUser, selectedUsers }) => {
         value={search}
         onChange={evt => setSearch(evt.target.value)}
       />
-      {selectedUsers.length && (
-        selectedUsers.map(selected => (
-          <MenuItem
-            key={selected}
-            value={selected}
-            onClick={() => deselectUser(selected)}
-          >Selected: {selected}</MenuItem>
-        ))
-      )}
-      {userList.length && (
-        userList
-          .filter(user => !selectedUsers.includes(user))
-          .map(user => (
+      {selectedUsers.length
+        ? (
+          selectedUsers.map(selected => (
             <MenuItem
-              key={user}
-              value={user}
-              onClick={() => selectUser(user)}
-            >
-              {user}
-            </MenuItem>
+              key={selected}
+              value={selected}
+              onClick={() => deselectUser(selected)}
+            >Selected: {selected}</MenuItem>
           ))
-      )}
+        )
+        : null}
+      {userList.length
+        ? (
+          userList
+            .filter(user => !selectedUsers.includes(user))
+            .map(user => (
+              <MenuItem
+                key={user}
+                value={user}
+                onClick={() => selectUser(user)}
+              >
+                {user}
+              </MenuItem>
+            ))
+        )
+        : null}
     </>
   );
 }

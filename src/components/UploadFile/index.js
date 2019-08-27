@@ -109,7 +109,7 @@ const UploadFile = () => {
           </div>
           <div className="share-file-description">
             <h1 className="no-margin"> Simple Private BlockSnack File Sharing</h1>
-            <p>Juicy meatballs brisket slammin' baked shoulder. Juicy smoker soy sauce burgers brisket. polenta mustard hunk greens. Wine technique snack skewers chuck excess. Oil heat slowly.</p>
+            <p>Add the files you'd like to share with your group</p>
           </div>
         </section>
       </div>
