@@ -5,8 +5,7 @@ import CircularProgress from '../CircularProgress';
 
 import './InvitationPage.css';
 
-import authNeeded from '../hocs/authNeeded';
-// import { GroupInvitation } from 'radiks';
+import { authNeeded, addNavbar } from '../hocs';
 
 const noop = () => new Promise(_ => _()).then(() => ({ activate: noop }))
 const GroupInvitation = { findById: noop }
@@ -37,4 +36,4 @@ const InvitationPage = ({ match: { params } }) => {
   );
 };
 
-export default authNeeded(InvitationPage);
+export default authNeeded(addNavbar(InvitationPage));

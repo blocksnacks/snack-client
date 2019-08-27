@@ -10,6 +10,10 @@
   text-align: center;
 }
 
+.file-list {
+  margin: 0;
+}
+
 .share-file-container {
   display:flex;
   justify-content: center;
@@ -35,7 +39,7 @@
   flex: 1 1 0;
 
   margin: 15px; 
-  padding: 30px 0px;
+  padding: 30px 15px;
   
   border: dotted grey 1px;
   border-radius: 2px;
@@ -59,9 +63,8 @@
 }
 
 .logout-btn-container {
-  width: 100%;
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
 }
 
 .form-container {
@@ -88,9 +91,11 @@
 
 .share-header {
   margin: auto;
+  margin-bottom: 25px;
 }
 
 .share-wrapper {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;

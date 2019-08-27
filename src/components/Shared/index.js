@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { UserGroup } from 'radiks';
 import {
   Table,
   TableHead,
@@ -11,7 +10,9 @@ import bytes from 'bytes';
 import './Shared.css';
 
 import CircularProgress from '../CircularProgress';
-import authNeeded from '../hocs/authNeeded';
+
+import './Shared.css';
+import { authNeeded, addNavbar } from '../hocs';
 
 import SharedDocument from '../../models/SharedDocument';
 
@@ -87,4 +88,4 @@ const Shared = () => {
   )
 }
 
-export default authNeeded(Shared);
+export default authNeeded(addNavbar(Shared));

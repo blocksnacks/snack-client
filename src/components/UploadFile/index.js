@@ -15,7 +15,7 @@ import './UploadFile.css';
 
 import SharedDocument from '../../models/SharedDocument';
 import { AppContext } from '../../contexts/AppContext';
-import authNeeded from '../hocs/authNeeded';
+import { authNeeded, addNavbar } from '../hocs';
 
 const useStyles = makeStyles(theme => ({
   fab: { margin: theme.spacing(1) },
@@ -85,21 +85,31 @@ const UploadFile = () => {
                 <Add />
               </Fab>
             </label>
-            <p className="no-margin">Drag and drop files</p>
-            <p className="no-margin center"> or click to send up to X FILE SIZE</p>
-            <Button
+            <p className="no-margin">Click to add</p>
+            <p className="no-margin center">files to share</p>
+            { fileList && fileList.length && (
+              <>
+              <div className="file-list">
+              <h4>Files to share:</h4>
+              <ul>
+              {fileList.map(file => <li className="no-margin" key={file.name}>{file.name}</li>)}
+              </ul>
+              </div>
+              <Button
               variant="contained"
               color="primary"
               className={classes.button}
               onClick={handleFileSubmit}
-            >
-              Upload Shiz
-            </Button>
-            {fileList && fileList.length ? fileList.map(file => <p key={file.name}>{file.name}</p>) : null}
+              fullWidth
+              >
+              Send Files
+              </Button>
+              </>
+                )}
           </div>
           <div className="share-file-description">
             <h1 className="no-margin"> Simple Private BlockSnack File Sharing</h1>
-            <p>Juicy meatballs brisket slammin' baked shoulder. Juicy smoker soy sauce burgers brisket. polenta mustard hunk greens. Wine technique snack skewers chuck excess. Oil heat slowly.</p>
+            <p>Add the files you'd like to share with your group</p>
           </div>
         </section>
       </div>
@@ -107,4 +117,4 @@ const UploadFile = () => {
   );
 }
 
-export default authNeeded(UploadFile);
+export default authNeeded(addNavbar(UploadFile));
