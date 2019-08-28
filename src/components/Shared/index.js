@@ -107,7 +107,11 @@ const Shared = () => {
           )
           : fetching
             ? <CircularProgress />
-            : <div>You don't have any documents</div>
+            : (
+              <div className="table-container">
+                <div>You don't have any documents</div>
+              </div>
+            )
           }
     </div>
   )
