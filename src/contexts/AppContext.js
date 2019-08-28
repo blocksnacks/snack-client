@@ -40,6 +40,7 @@ export const AppContextProvider = ({ children }) => {
         userGroup,
         setUserGroup,
         emailNotEntered,
+        setEmailNotEntered,
         loggedIn
       }}
     >
