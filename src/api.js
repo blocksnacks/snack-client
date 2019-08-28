@@ -1,4 +1,4 @@
-import { ERROR_POSTING_EMAILS, RADIKS_URL } from './constants';
+import { ERROR_POSTING_EMAILS } from './constants';
 
 export const sendEmails = async (recipients, groupName, userSession) => {
   const body = {
@@ -7,7 +7,7 @@ export const sendEmails = async (recipients, groupName, userSession) => {
     groupName,
   };
   try {
-    return await (await fetch(RADIKS_URL + '/email/invite-users/', {
+    return await (await fetch('/email/invite-users/', {
       method: 'POST',
       body: JSON.stringify(body),
       headers: { 'Content-Type': 'application/json' }
