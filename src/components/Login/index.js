@@ -23,7 +23,7 @@ const Login = ({ nullUsername }) => {
               >
                 Log in
               </Button>
-              {nullUsername && <p>Your username is not yet registered. Please come back again once your registration process is complete.</p>}
+              {nullUsername && (<p>Your username is not yet registered. Please come back again once your registration process is complete.</p>)}
             </div>
           </header>
         </div>
