@@ -12,7 +12,7 @@ const userSession = new UserSession({
 });
 
 configure({
-  apiServer: process.env.DOMAIN || 'http://localhost:1260',
+  apiServer: process.env.DOMAIN || 'https://sendfriend.herokuapp.com',
   userSession
 });
 
