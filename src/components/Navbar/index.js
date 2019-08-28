@@ -37,7 +37,7 @@ const NavBar = ({ location: { pathname } }) => {
           label="Logout"
           variant="contained"
           color="primary"
-          onClick={() => userSession.signUserOut('http://localhost:3000')}
+          onClick={() => userSession.signUserOut(process.env.DOMAIN || 'http://localhost:1260')}
         />
       </Tabs>
     </Paper>

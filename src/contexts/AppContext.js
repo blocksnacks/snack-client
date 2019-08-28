@@ -12,7 +12,7 @@ const userSession = new UserSession({
 });
 
 configure({
-  apiServer: process.env.RADIKS_SERVER || 'http://localhost:1260',
+  apiServer: process.env.DOMAIN || 'http://localhost:1260',
   userSession
 });
 
