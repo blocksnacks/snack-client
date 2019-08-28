@@ -31,17 +31,17 @@ Also critically, you can only invite yourself to created groups, likely for the 
 
 
 <span style="float: left; margin-right: 10px;">
-  <img width="300" src="https://avatars1.githubusercontent.com/u/30298111?s=460&v=4"/>
+  <img width="200" src="https://avatars1.githubusercontent.com/u/30298111?s=460&v=4"/>
   <div style="text-align: center;"><b>Erik Larsen</b></div>
   <div style="text-align: center;">Backend/Plant Enthusiast</div>
 </span>
 <span style="float: left; margin-right: 10px;">  
-  <img width="300" src="https://avatars0.githubusercontent.com/u/13925464?s=460&v=4"/>
+  <img width="200" src="https://avatars0.githubusercontent.com/u/13925464?s=460&v=4"/>
     <div style="text-align: center;"><b>Mary Snow</b></div>
   <div style="text-align: center;">Dev Ops/Budding Thespian</div>
 </span>
 <span style="float: left; margin-right: 10px;">
-  <img width="300" src="https://avatars2.githubusercontent.com/u/13630752?s=460&v=4"/>
+  <img width="200" src="https://avatars2.githubusercontent.com/u/13630752?s=460&v=4"/>
     <div style="text-align: center;"><b>Mark Romano</b></div>
   <div style="text-align: center;">Frontend/Cat Fanatic</div>
 </span>
