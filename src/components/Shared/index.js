@@ -5,8 +5,11 @@ import {
   TableRow,
   TableCell,
   TableBody,
-  Button
+  Button,
+  Fab,
+  makeStyles
 } from '@material-ui/core';
+import { GetApp } from '@material-ui/icons';
 import bytes from 'bytes';
 import './Shared.css';
 
@@ -17,7 +20,13 @@ import { authNeeded, addNavbar } from '../hocs';
 
 import SharedDocument from '../../models/SharedDocument';
 
+const useStyles = makeStyles(theme => ({
+  fab: { margin: theme.spacing(1) },
+  button: { margin: theme.spacing(1) }
+}));
+
 const Shared = () => {
+  const classes = useStyles();
   const [docs, setDocs] = useState([]);
   const [errorFetching, setErrorFetching] = useState(false);
   const [fetching, setFetching] = useState(false);
@@ -30,7 +39,7 @@ const Shared = () => {
         setFetching(true);
         const docs = (await SharedDocument.fetchList())
           .filter(({ attrs }) => typeof attrs.name === 'string')
-          .map(({ attrs}) => ({
+          .map(({ attrs }) => ({
             id: attrs._id,
             name: attrs.name,
             createdDate: attrs.createdAt,
@@ -49,7 +58,7 @@ const Shared = () => {
   }, [])
 
   useEffect(() => {
-    (async function() {
+    (async function () {
       if (downloadInProgress && activeDoc) {
         const aTag = document.createElement('a');
         aTag.href = activeDoc.content;
@@ -97,7 +106,11 @@ const Shared = () => {
                             setActiveDoc(doc);
                             setDownloadInProgress(true);
                           }}
-                        >DL</Button>
+                        >
+                          <Fab aria-label="download" component="span" color="primary" className={classes.fab}>
+                            <GetApp />
+                          </Fab>
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -112,7 +125,7 @@ const Shared = () => {
                 <div>You don't have any documents</div>
               </div>
             )
-          }
+      }
     </div>
   )
 }

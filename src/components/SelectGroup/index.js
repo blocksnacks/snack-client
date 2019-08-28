@@ -64,7 +64,9 @@ const SelectGroup = ({ history }) => {
           value={tempUserGroup}
         >
           {possibleGroups.map(pGroup => (
-            <MenuItem value={pGroup} key={pGroup._id}>{pGroup.attrs.name}</MenuItem>
+            typeof pGroup.attrs.name === 'string' && (
+              <MenuItem value={pGroup} key={pGroup._id}>{pGroup.attrs.name}</MenuItem>
+            )
           ))}
         </Select>
         <h2>...or create a new group</h2>
